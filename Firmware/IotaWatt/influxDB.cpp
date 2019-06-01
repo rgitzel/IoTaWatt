@@ -73,7 +73,7 @@ uint32_t influxService(struct serviceBlock* _serviceBlock){
       if(!currLog.isOpen()){                  
         return UTCtime() + 5;
       }
-      log("influxDB: started, url=%s:%d, db=%s, interval=%d", influxURL, influxPort,
+      log("influxDB: started eh, url=%s:%d, db=%s, interval=%d", influxURL, influxPort,
               influxDataBase, influxDBInterval);
       state = queryLastPostTime;
       trace(T_influx,2);
@@ -108,7 +108,7 @@ uint32_t influxService(struct serviceBlock* _serviceBlock){
 
       if( ! request) request = new asyncHTTPrequest;
       request->setTimeout(5);
-      request->setDebug(false);
+      // request->setDebug(false);
       {
         char URL[100];
         sprintf_P(URL, PSTR("%s:%d/query"),influxURL,influxPort);
@@ -422,7 +422,7 @@ uint32_t influxService(struct serviceBlock* _serviceBlock){
         request = new asyncHTTPrequest;
       }
       request->setTimeout(3);
-      request->setDebug(false);
+      // request->setDebug(false);
       if(request->debug()){
         Serial.println(ESP.getFreeHeap()); 
         Serial.println(datef(localTime(),"hh:mm:ss"));

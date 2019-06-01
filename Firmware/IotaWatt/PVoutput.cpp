@@ -509,7 +509,7 @@ uint32_t PVoutput::tickHTTPPost(){
         request = new asyncHTTPrequest;
     }
     request->setTimeout(3);
-    request->setDebug(false);
+    // request->setDebug(false);
     char URL[128];
     size_t len = sprintf_P(URL, PSTR("HTTP://pvoutput.org/service/r2/%s"), _POSTrequest->URI);
     if( ! request->open("POST", URL)){

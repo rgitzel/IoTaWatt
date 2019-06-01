@@ -106,7 +106,7 @@ uint32_t EmonService(struct serviceBlock* _serviceBlock){
       String URL(EmonURL);
       URL += ":" + String(EmonPort) + EmonURI + "/input/get?node=" + String(emonNode);
       request->setTimeout (10);
-      request->setDebug(false);
+      // request->setDebug(false);
       trace(T_Emon,3);
       request->open("GET", URL.c_str());
       String auth("Bearer ");
@@ -348,7 +348,7 @@ uint32_t EmonService(struct serviceBlock* _serviceBlock){
       String URL(EmonURL);
       URL += ":" + String(EmonPort) + EmonURI + "/input/bulk";
       request->setTimeout(2);
-      request->setDebug(false);
+      // request->setDebug(false);
       if(request->debug()){
         Serial.println(datef(localTime(),"hh:mm:ss"));
       }
@@ -438,7 +438,7 @@ case sendSecure:{
       String URL(EmonURL);
       URL += ":" + String(EmonPort) + EmonURI + "/input/bulk";
       request->setTimeout(2);
-      request->setDebug(false);
+      // request->setDebug(false);
       trace(T_Emon,10); 
       String auth(EmonUsername);
       auth += ':' + bin2hex(value, 32);

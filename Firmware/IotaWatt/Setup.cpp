@@ -200,7 +200,7 @@ if(spiffsBegin()){
     while(WiFi.status() != WL_CONNECTED){
       if(millis() > autoConnectTimeout){
         setLedCycle(LED_CONNECT_WIFI);
-        wifiManager.setDebugOutput(false);
+        // wifiManager.setDebugOutput(false);
         wifiManager.setConfigPortalTimeout(180);
         String ssid = "iota" + String(ESP.getChipId());
         String pwd = deviceName;

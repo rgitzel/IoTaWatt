@@ -63,8 +63,9 @@ uint32_t updater(struct serviceBlock* _serviceBlock) {
       if( ! request){
         request = new asyncHTTPrequest;
       }
-      request->setDebug(false);
+      request->setDebug(true);
       String URL = String(updateURL) + updatePath;
+      log("Updater: checking url %s", URL.c_str());
       if( ! request->open("GET", URL.c_str())){
         HTTPrelease(HTTPtoken);
         break;
@@ -79,12 +80,15 @@ uint32_t updater(struct serviceBlock* _serviceBlock) {
         HTTPrelease(HTTPtoken);;
         break;
       }
+      log("request made");
       state = waitVersion;
       return 1;
     }
 
     case waitVersion: {
-      if(request->readyState() != 4){
+      int st = request->readyState();
+      if(st != 4){
+        log("no response yet (%d)", st);
         return UTCtime() + 1;
       }
       HTTPrelease(HTTPtoken);;
@@ -152,7 +156,7 @@ uint32_t updater(struct serviceBlock* _serviceBlock) {
         request = new asyncHTTPrequest;
       }
       String URL = String(updateURL) + "/firmware/bin/" + updateVersion + ".bin";
-      request->setDebug(false);
+      // request->setDebug(false);
       request->open("GET", URL.c_str());
       request->setTimeout(5);
       request->onData([](void* arg, asyncHTTPrequest* request, size_t available){

@@ -17,7 +17,14 @@ uint32_t WiFiService(struct serviceBlock* _serviceBlock) {
     if(!wifiConnected){
       wifiConnected = true;
       String ip = WiFi.localIP().toString();
-      log("WiFi connected. SSID=%s, IP=%s, channel=%d, RSSI %ddb", WiFi.SSID().c_str(), ip.c_str(), WiFi.channel(), WiFi.RSSI());
+      log("WiFi connected. SSID=%s, IP=%s, channel=%d, RSSI %ddb, %s, %s", 
+        WiFi.SSID().c_str(), 
+        ip.c_str(), 
+        WiFi.channel(), 
+        WiFi.RSSI(),
+        WiFi.BSSIDstr().c_str(),
+        WiFi.dnsIP().toString().c_str()
+      );
     }
   }
   else {
